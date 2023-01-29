@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <div class="container mx-auto">
+    <%= link_to "Blogs", root_path, class:"navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+      <div class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <%= link_to "#", id: "navbar-dropdown", class: "nav-link dropdown-toggle", data: { target: "nav-account-dropdown", bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>
+              <%= image_tag(current_user.avatar_thumbnail(current_user, 30), class: "rounded-circle") %>
+              <%= current_user.email %>
+            <% end %>
+            <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
+              <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item mx-2">
+            <%= link_to "Login", new_user_session_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Signup", new_user_registration_path, class:"nav-link" %>
+          </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

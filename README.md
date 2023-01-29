@@ -8,6 +8,8 @@ Things you may want to cover:
 * Ruby version
 
 * System dependencies
+Install ImageMagick and/or libvips for gem "image_processing"
+https://github.com/janko/image_processing
 
 * Configuration
 
