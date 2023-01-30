@@ -7,7 +7,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
   after_commit :add_default_avatar, on: %i[create update]
 
-  def avatar_thumbnail(user, size=225)
+  def self.get_user_by_id(user_id)
+    user = User.find_by(user_id: user_id)
+  end
+
+  def get_avatar_thumbnail(user, size=225)
     if avatar.attached?
       user.avatar.variant(resize_to_fill: [size, size])
     end

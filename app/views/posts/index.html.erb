@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Posts</h1>
-
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
+<div class="row">
+  <div class="col-sm-6 d-flex align-items-center">
+    <span><%= page_entries_info @posts %></span>
+  </div>
+  <div class="col-sm-6 text-end">
+    <%= link_to(new_post_path, class: "btn btn-primary") do %>
+      <i class="bi bi-pencil-square me-1"></i> Write new post
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New post", new_post_path %>
+<div id="posts">
+  <div class="container overflow-hidden my-4">
+    <div class="row gx-5 gy-4">
+      <% @posts.in_groups_of(3, false).each do |post| %>
+        <%= render post %>
+      <% end %>
+    </div>
+  </div>
+  <div class="container pagination justify-content-center">
+    <%= paginate @posts, window: 3 %>
+  </div>
+</div>
