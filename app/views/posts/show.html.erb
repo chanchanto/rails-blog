@@ -1,14 +1,47 @@
-<%= link_to(posts_path, class: "fs-1 text-dark text-decoration-none") do %>
-  <i class="bi bi-arrow-left"></i>
-<% end %>
+<div class="row justify-content-space-between">
+  <div class="col">
+    <%= link_to(posts_path, class: "fs-1 text-dark text-decoration-none") do %>
+      <i class="bi bi-arrow-left"></i>
+    <% end %>
+  </div>
+  <div class="col-sm-3 d-flex justify-content-space-between align-middle">
+    <div class="col align-middle text-end">
+      <%= link_to(edit_post_path(@post), class: "btn btn-outline-primary fs-5", style: "width: 50px; height:50px") do %>
+        <i class="bi bi-pencil align-middle"></i>
+      <% end %>
+    </div>
+    <div class="col align-middle text-end">
+      <%= button_to(@post, method: :delete, class: "btn btn-outline-danger", style: "width: 50px; height:50px") do %>
+        <i class="bi bi-trash3"></i>
+      <% end %>
+    </div>
+    <div class="col align-middle text-end">
+      <%= link_to(new_post_path, class: "btn btn-outline-success fs-5", style: "width: 50px; height:50px") do %>
+        <i class="bi bi-pencil-square align-middle"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "New post", new_post_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+<div class="card overflow-auto shadow-sm p-3">
+  <div class="card-body">
+    <h1 class="card-title text-truncate">
+      <%= @post.title %>
+    </h1>
+    <div class="row my-3">
+      <div class="col-sm-6">
+        <small><%= @post.user_id %></small>
+      </div>
+      <div class="col-sm-6 text-end">
+        <%= User::get_user_by_id(@post.user_id) %>
+        <small>posted <%= time_ago_in_words(@post.created_at) %> ago</small>
+      </div>
+    </div>
+    <p class="card-text text-truncate">
+      <%= @post.content %>
+    </p>
+    
+  </div>
 </div>
