@@ -1,19 +1,21 @@
 <div id="<%= dom_id post %>" class="col-sm-4">
   <%= link_to(post, class: "text-dark text-decoration-none") do %>
-    <div class="card overflow-auto shadow-sm">
+    <div class="card  shadow-sm" style="height: 15rem">
       <div class="card-body">
-        <h5 class="card-title text-truncate">
+        <h5 class="card-title mb-3"
+            style="-webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;overflow: hidden;">
           <%= post.title %>
         </h5>
-        <p class="card-text text-truncate">
+        <p class="card-text"
+           style="-webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical;overflow: hidden;">
           <%= post.content %>
         </p>
         <div class="row">
           <div class="col-sm-6">
-            <small><%= post.user_id %></small>
+            <%= image_tag(post.user.avatar.variant(resize_to_fill: [30, 30]), class: "rounded-circle") %>
+            <small><%= post.user.email %></small>
           </div>
           <div class="col-sm-6 text-end">
-            <%= User::get_user_by_id(post.user_id) %>
             <small>posted <%= time_ago_in_words(post.created_at) %> ago</small>
           </div>
         </div>
