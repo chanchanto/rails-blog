@@ -8,7 +8,7 @@
         </h5>
         <p class="card-text"
            style="-webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical;overflow: hidden;">
-          <%= post.content %>
+          <%= post.content.to_plain_text %>
         </p>
         <div class="row">
           <div class="col-sm-6">
