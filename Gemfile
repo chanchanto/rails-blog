@@ -48,8 +48,13 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 
+# Load environment variables from .env into ENV  
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use authentication
 gem 'devise'
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 # Use pagination
 gem 'kaminari'
