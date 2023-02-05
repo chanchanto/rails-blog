@@ -1,23 +1,53 @@
 <h1>Posts</h1>
-<div class="row">
-  <div class="col-sm-6 d-flex align-items-center">
-    <span><%= page_entries_info @posts %></span>
-  </div>
-  <div class="col-sm-6 text-end">
-    <%= link_to(new_post_path, class: "btn btn-primary") do %>
-      <i class="bi bi-pencil-square me-1"></i> Write new post
-    <% end %>
-  </div>
+
+<!-- filter -->
+<div class="row py-3">
+  <%= search_form_for @q, data: { controller: 'search-form', search_form_target: 'form', turbo_frame: 'search' } do |f| %>
+    <div class="form-group" >
+      <span style="position: absolute;
+                    margin-left: 0.5rem;
+                    z-index: 2;
+                    display: block;
+                    width: 2.375rem;
+                    height: 2.375rem;
+                    line-height: 2.375rem;
+                    text-align: center;
+                    pointer-events: none;">
+        <i class="bi bi-search text-secondary"></i>
+      </span>
+      <%= f.search_field :title_or_action_text_rich_text_body_cont,
+        class: "form-control ps-5",
+        placeholder: "Search by post title or content",
+        autocomplete: "off",
+        data: { action: "input->search-form#search" } %>
+    </div>
+  <% end %>
 </div>
-<div id="posts">
-  <div class="container overflow-hidden my-4">
-    <div class="row gx-5 gy-4">
-      <% @posts.in_groups_of(3, false).each do |post| %>
-        <%= render post %>
+
+<!-- result -->
+<%= turbo_frame_tag 'search', data: { turbo_frame: :_top } do %>
+  <!-- result number + new post button -->
+  <div class="row">
+    <div class="col-sm-6 d-flex align-items-center">
+      <span><%= page_entries_info @posts %></span>
+    </div>
+    <div class="col-sm-6 text-end">
+      <%= link_to(new_post_path, class: "btn btn-primary") do %>
+        <i class="bi bi-pencil-square me-1"></i> Write new post
       <% end %>
     </div>
   </div>
-  <div class="container pagination justify-content-center">
-    <%= paginate @posts, window: 3 %>
+  <!-- post list -->
+  <div id="posts">
+    <div class="container overflow-hidden my-4">
+      <div class="row gx-5 gy-4">
+        <% @posts.in_groups_of(3, false).each do |post| %>
+          <%= render post %>
+        <% end %>
+      </div>
+    </div> 
+    <div class="container pagination justify-content-center">
+      <%= paginate @posts, window: 3 %>
+    </div>
   </div>
-</div>
+<% end %>
