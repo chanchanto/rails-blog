@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   # GET /posts or /posts.json
   def index
@@ -58,6 +60,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def check_owner
+    @post = current_user.posts.find_by(id: params[:id])
+    redirect_to posts_path, notice: "Not authorized action" if @post.nil?
   end
 
   private

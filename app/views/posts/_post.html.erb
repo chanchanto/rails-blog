@@ -11,12 +11,12 @@
           <%= post.content.to_plain_text %>
         </p>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-6 text-truncate">
             <%= image_tag(post.user.avatar.variant(resize_to_fill: [30, 30]), class: "rounded-circle") %>
             <small><%= post.user.email %></small>
           </div>
           <div class="col-sm-6 text-end">
-            <small>posted <%= time_ago_in_words(post.created_at) %> ago</small>
+            <small><%= time_ago_in_words(post.created_at) %> ago</small>
           </div>
         </div>
       </div>
