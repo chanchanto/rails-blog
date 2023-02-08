@@ -1,9 +1,10 @@
 <h1>Posts</h1>
 
-<!-- filter -->
+<!-- search -->
 <div class="row py-3">
   <%= search_form_for @q, data: { controller: 'search-form', search_form_target: 'form', turbo_frame: 'search' } do |f| %>
-    <div class="form-group" >
+    <!-- search by title, content -->
+    <div class="form-group my-1" >
       <span style="position: absolute;
                     margin-left: 0.5rem;
                     z-index: 2;
@@ -19,6 +20,24 @@
         class: "form-control ps-5",
         placeholder: "Search by post title or content",
         autocomplete: "off",
+        data: { action: "input->search-form#search" } %>
+    </div>
+    <!-- search by tag -->
+    <div class="form-group my-1">
+      <span style="position: absolute;
+                    margin-left: 0.5rem;
+                    z-index: 2;
+                    display: block;
+                    width: 2.375rem;
+                    height: 2.375rem;
+                    line-height: 2.375rem;
+                    text-align: center;
+                    pointer-events: none;">
+        <i class="bi bi-tags text-secondary"></i>
+      </span>
+      <%= f.search_field :tags_name_in,
+        class: "form-control ps-5",
+        placeholder: "Search by tags",
         data: { action: "input->search-form#search" } %>
     </div>
   <% end %>
