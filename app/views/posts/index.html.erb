@@ -23,7 +23,8 @@
         data: { action: "input->search-form#search" } %>
     </div>
     <!-- search by tag -->
-    <div class="form-group my-1">
+    <div class="form-group my-2">
+      <%# 
       <span style="position: absolute;
                     margin-left: 0.5rem;
                     z-index: 2;
@@ -34,17 +35,21 @@
                     text-align: center;
                     pointer-events: none;">
         <i class="bi bi-tags text-secondary"></i>
-      </span>
-      <%= f.search_field :tags_name_in,
-        class: "form-control ps-5",
-        placeholder: "Search by tags",
-        data: { action: "input->search-form#search" } %>
+      </span>  
+      %>
+      <%= f.select :tags_name_in,
+        options_from_collection_for_select(ActsAsTaggableOn::Tag.order(:name, :name), 'name', 'name'),
+        { include_blank: false },
+        { multiple: true,
+          data: { action: "input->search-form#search", controller: "select" },
+          class: "form-select ps-5" }
+      %>
     </div>
   <% end %>
 </div>
 
 <!-- result -->
-<%= turbo_frame_tag 'search', data: { turbo_frame: :_top } do %>
+<%= turbo_frame_tag 'search', data: { turbo_frame: :_top }, loading: :lazy do %>
   <!-- result number + new post button -->
   <div class="row">
     <div class="col-sm-6 d-flex align-items-center">
