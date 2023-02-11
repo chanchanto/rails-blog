@@ -4,4 +4,5 @@ class Post < ApplicationRecord
     has_rich_text :content
     has_one :action_text_rich_text, class_name: 'ActionText::RichText', as: :record
     acts_as_taggable_on :tags
+    has_many :comments
 end

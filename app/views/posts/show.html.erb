@@ -27,7 +27,7 @@
   <% end %>
 </div>
 
-<div class="card overflow-auto shadow-sm p-3">
+<div class="card overflow-auto shadow-sm p-3 mb-4">
   <div class="card-body">
     <h1 class="card-title">
       <%= @post.title %>
@@ -49,5 +49,15 @@
         <span class="badge rounded-pill bg-secondary fw-normal px-3 py-2 me-2 mb-1"><%= tag %></span>
       <% end %>
     </p>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h3>Comments (<%= @post.comments.count %>)</h3>
+  <div>
+    <%= render @post.comments %>
+  </div>
+  <div>
+    <%= render partial: "comments/form", post: @post %>
   </div>
 </div>

@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :posts
+  has_many :comments, dependent: :destroy
   has_one_attached :avatar
   after_commit :add_default_avatar, on: %i[create update]
 

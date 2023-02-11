@@ -1,0 +1,17 @@
+<div class="px-3 py-2">
+  <div class="row d-flex justify-content-between mb-2">
+    <div class="col">
+      <%= image_tag(comment.user.avatar.variant(resize_to_fill: [30, 30]), class: "rounded-circle") %>
+      <small><%= comment.user.email %></small>
+    </div>
+    <div class="col text-end">
+      <small class="text-secondary">
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </small>
+    </div>
+  </div>
+  <p class="m-0 p-0">
+    <%= comment.body %>
+  </p>
+  <hr class="mt-4 mb-2">
+</div>
