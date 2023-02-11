@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <%= form_for [ @post, @comment ]  do |form| %>
     <div class="form-group row py-2 mt-2">
-      <%= form.text_field :body, class:"form-control", placeholder: "Write your comment" %>
+      <%= form.rich_text_area :body, class:"form-control", placeholder: "Write your comment" %>
     </div>
     <div class="actions row  pt-3">
         <%= form.submit "Comment", class: "btn btn-primary" %>
