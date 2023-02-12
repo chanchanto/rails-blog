@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
 
   def create
     @comment = current_user.comments.create comment_params
@@ -14,7 +14,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to post_path(@post)
+    flash[:notice] = 'Comment was successfully destroyed.'
+    redirect_to post_path(@comment.post)
   end
 
   private
