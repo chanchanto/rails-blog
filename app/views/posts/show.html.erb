@@ -57,7 +57,7 @@
   <div>
     <%= render @post.comments %>
   </div>
-  <div>
-    <%= render partial: "comments/form", post: @post %>
+  <div class="container mt-5">
+    <%= render "comments/form", post: @post, comment: @post.comments.build %>
   </div>
 </div>

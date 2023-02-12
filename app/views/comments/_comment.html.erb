@@ -13,8 +13,23 @@
   <div class="button">
     <% if user_signed_in? %>
       <% if current_user == comment.user %>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-end">
+          <div class="col-sm-1">
+            <%= link_to(
+              nil,
+              remote: true,
+              class: "btn btn-outline-primary fs-5",
+              style: "width: 50px; height:50px",
+              data: {
+                controller: "comments",
+                action: "comments#toggleForm",
+                comments_body_param: "comment-body-#{ comment.id }",
+                comments_form_param: "comment-form-#{ comment.id }"
+            }) do %>
+              <i class="bi bi-pencil align-middle"></i>
+            <% end %>
+          </div> 
+          <div class="col-sm-1 text-end">
             <%= button_to([comment.post, comment], method: :delete, class: "btn btn-outline-danger", style: "width: 50px; height:50px") do %>
               <i class="bi bi-trash3"></i>
             <% end %>
@@ -24,7 +39,12 @@
     <% end %>
   </div>
   <p class="m-0 p-0">
-    <%= comment.body %>
+    <div id="comment-body-<%= comment.id %>">
+      <%= comment.body %>
+    </div>
+    <div id="comment-form-<%= comment.id %>" class="d-none">
+      <%= render "comments/form", post: @post, comment: comment %>
+    </div>
   </p>
   <hr class="mt-4 mb-2">
 </div>

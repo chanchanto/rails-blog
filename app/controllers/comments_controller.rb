@@ -11,6 +11,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      if @comment.update(comment_params)
+        flash[:notice] = 'Comment was successfully updated.'
+        redirect_to post_path(@comment.post)
+      else
+        flash[:notice] = "Error updating comment: #{@comment.errors}"
+      end
+    end
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
