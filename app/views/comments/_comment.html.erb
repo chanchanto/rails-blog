@@ -10,31 +10,25 @@
       </small>
     </div>
   </div>
-  <div class="button">
+  <div class="row justify-content-en">
+    <div class="col"></div>
     <% if user_signed_in? %>
       <% if current_user == comment.user %>
-        <div class="row justify-content-end">
-          <div class="col-sm-1">
-            <%= link_to(
-              nil,
-              remote: true,
-              class: "btn btn-outline-primary fs-5",
-              style: "width: 50px; height:50px",
-              data: {
-                controller: "comments",
-                action: "comments#toggleForm",
-                comments_body_param: "comment-body-#{ comment.id }",
-                comments_form_param: "comment-form-#{ comment.id }"
-            }) do %>
-              <i class="bi bi-pencil align-middle"></i>
-            <% end %>
-          </div> 
-          <div class="col-sm-1 text-end">
-            <%= button_to([comment.post, comment], method: :delete, class: "btn btn-outline-danger", style: "width: 50px; height:50px") do %>
-              <i class="bi bi-trash3"></i>
-            <% end %>
-          </div> 
-        </div>
+        <div class="col-sm-1 d-sm-flex center">
+          <%= render "shared/buttons/edit_button",
+            path: nil,
+            remote: true,
+            data: {
+              controller: "comments",
+              action: "comments#toggleForm",
+              comments_body_param: "comment-body-#{ comment.id }",
+              comments_form_param: "comment-form-#{ comment.id }"
+            }
+          %>
+        </div> 
+        <div class="col-sm-1 center">
+          <%= render "shared/buttons/delete_button", path: [comment.post, comment] %>
+        </div> 
       <% end %>
     <% end %>
   </div>

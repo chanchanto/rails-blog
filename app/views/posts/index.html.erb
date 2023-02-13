@@ -1,19 +1,16 @@
-<h1>Posts</h1>
+<div class="row">
+  <h1 class="col">Posts</h1>
+  <div class="col-sm-2">
+      <%= render "shared/buttons/new_button", path: new_post_path, text: "Write new post" %>
+    </div>
+</div>
 
 <!-- search -->
-<div class="row py-3">
+<div class="row my-4 mx-5">
   <%= search_form_for @q, data: { controller: 'search-form', search_form_target: 'form', turbo_frame: 'search' } do |f| %>
     <!-- search by title, content -->
     <div class="form-group my-1" >
-      <span style="position: absolute;
-                    margin-left: 0.5rem;
-                    z-index: 2;
-                    display: block;
-                    width: 2.375rem;
-                    height: 2.375rem;
-                    line-height: 2.375rem;
-                    text-align: center;
-                    pointer-events: none;">
+      <span class="has-icon">
         <i class="bi bi-search text-secondary"></i>
       </span>
       <%= f.search_field :title_or_action_text_rich_text_body_cont,
@@ -24,19 +21,6 @@
     </div>
     <!-- search by tag -->
     <div class="form-group my-2">
-      <%# 
-      <span style="position: absolute;
-                    margin-left: 0.5rem;
-                    z-index: 2;
-                    display: block;
-                    width: 2.375rem;
-                    height: 2.375rem;
-                    line-height: 2.375rem;
-                    text-align: center;
-                    pointer-events: none;">
-        <i class="bi bi-tags text-secondary"></i>
-      </span>  
-      %>
       <%= f.select :tags_name_in,
         options_from_collection_for_select(ActsAsTaggableOn::Tag.order(:name, :name), 'name', 'name'),
         { include_blank: false },
@@ -50,20 +34,11 @@
 
 <!-- result -->
 <%= turbo_frame_tag 'search', data: { turbo_frame: :_top } do %>
-  <!-- result number + new post button -->
-  <div class="row">
-    <div class="col-sm-6 d-flex align-items-center">
-      <span><%= page_entries_info @posts %></span>
-    </div>
-    <div class="col-sm-6 text-end">
-      <%= link_to(new_post_path, class: "btn btn-primary") do %>
-        <i class="bi bi-pencil-square me-1"></i> Write new post
-      <% end %>
-    </div>
+  <div class="row m-0 py-3">
+    <span><%= page_entries_info @posts %></span>
   </div>
-  <!-- post list -->
   <div id="posts">
-    <div class="container overflow-hidden my-4">
+    <div class="container overflow-hidden mb-4">
       <div class="row gx-5 gy-4">
         <% @posts.in_groups_of(3, false).each do |post| %>
           <%= render post %>
