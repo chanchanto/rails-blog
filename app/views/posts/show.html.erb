@@ -29,9 +29,14 @@
 
 <div class="card overflow-auto shadow-sm p-3 mb-4">
   <div class="card-body">
-    <h1 class="card-title">
-      <%= @post.title %>
-    </h1>
+    <div class="row">
+      <h1 class="col card-title">
+        <%= @post.title %>
+      </h1>
+      <div class="col-sm-1 d-flex justify-content-end">
+        <%= render partial: "bookmarks/form", post: @post %>
+      </div>
+    </div>
     <div class="row my-3">
       <div class="col-sm-6">
         <%= image_tag(@post.user.avatar.variant(resize_to_fill: [30, 30]), class: "rounded-circle") %>

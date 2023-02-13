@@ -1,0 +1,20 @@
+<% if current_user.liked? @post, vote_scope: "bookmark" %>
+  <%= link_to(
+        post_bookmark_path(@post),
+        method: :delete,
+        class: "btn btn-warning fs-5 d-flex justify-content-center align-items-center",
+        style: "width: 50px; height:50px"
+  ) do %>
+    <i class="bi bi-bookmark-fill"></i>
+  <% end %>
+<% else %>
+  <%= link_to(
+        post_bookmarks_path(@post),
+        method: :post,
+        format: :turbo_stream,
+        class: "btn btn-outline-warning fs-5 d-flex justify-content-center align-items-center",
+        style: "width: 50px; height:50px"
+  ) do %>
+    <i class="bi bi-bookmark"></i>
+  <% end %>
+<% end%>
