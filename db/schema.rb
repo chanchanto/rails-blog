@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_13_110846) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -51,8 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_110846) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
-    t.integer "post_id"
-    t.integer "user_id"
+    t.bigint "post_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -64,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_110846) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "post_id"
     t.integer "cached_scoped_bookmark_votes_total", default: 0
     t.integer "cached_scoped_bookmark_votes_score", default: 0
@@ -78,11 +81,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_110846) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "tag_id"
+    t.bigint "tag_id"
     t.string "taggable_type"
-    t.integer "taggable_id"
+    t.bigint "taggable_id"
     t.string "tagger_type"
-    t.integer "tagger_id"
+    t.bigint "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at", precision: nil
     t.string "tenant", limit: 128
@@ -126,9 +129,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_110846) do
 
   create_table "votes", force: :cascade do |t|
     t.string "votable_type"
-    t.integer "votable_id"
+    t.bigint "votable_id"
     t.string "voter_type"
-    t.integer "voter_id"
+    t.bigint "voter_id"
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
