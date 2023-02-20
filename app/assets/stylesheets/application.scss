@@ -38,6 +38,18 @@
    pointer-events: none;
 }
 
+// tags
+
+.tags {
+   background-color: #efefef;
+   border: 0 solid #dee2e6;
+   color: #343a40;
+   font-size: $font-size-base;
+   font-weight: $font-weight-normal;
+   margin: 0 3px 3px 0;
+   padding: 6px;
+}
+
 // hover effects
 
 .hover-shadow:hover {
