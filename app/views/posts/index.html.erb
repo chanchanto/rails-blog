@@ -38,12 +38,12 @@
     <span><%= page_entries_info @posts %></span>
   </div>
   <div id="posts">
-    <div class="container overflow-hidden mb-4">
-      <div class="row gx-5 gy-4">
-        <% @posts.in_groups_of(3, false).each do |post| %>
+    <div class="container overflow-hidden mb-4 p-2">
+      <% @posts.in_groups_of(3, false).each do |post| %>
+        <div class="row gx-5 pb-4">
           <%= render post %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div> 
     <div class="container pagination justify-content-center">
       <%= paginate @posts, window: 3 %>
