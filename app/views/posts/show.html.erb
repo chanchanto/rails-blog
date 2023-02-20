@@ -24,9 +24,11 @@
       <h1 class="col card-title">
         <%= @post.title %>
       </h1>
-      <div class="col-sm-1 d-flex justify-content-end">
-        <%= render partial: "bookmarks/form", post: @post %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="col-sm-1 d-flex justify-content-end">
+          <%= render partial: "bookmarks/form", post: @post %>
+        </div>
+      <% end %>
     </div>
     <div class="row my-3">
       <div class="col-sm-6">
@@ -53,7 +55,9 @@
   <div>
     <%= render @post.comments %>
   </div>
-  <div class="container mt-5">
-    <%= render "comments/form", post: @post, comment: @post.comments.build %>
-  </div>
+  <% if user_signed_in? %>
+    <div class="container mt-5">
+      <%= render "comments/form", post: @post, comment: @post.comments.build %>
+    </div>
+  <% end %>
 </div>
